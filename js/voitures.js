@@ -1,179 +1,234 @@
-import { voituresInitiales }  from './data.js'
+import { voituresInitiales } from "./data.js";
 
+let voitures = [...voituresInitiales];
 
-// console.log(voituresInitiales);
+let idModifier = null;
 
+const marque = document.querySelector("#marque");
+const modele = document.querySelector("#modele");
+const immatriculation = document.querySelector("#immatriculation");
+const categorie = document.querySelector("#categorie");
+const statut = document.querySelector("#statut");
+const prixJour = document.querySelector("#prix-jour");
+const boutonEnregistrer = document.querySelector("#bouton-enregistrer");
 
+const titreFormailaire = document.querySelector("#titre-formulaire");
 
+const formulaire = document.querySelector("#formulaire-voiture");
+const listeVoitures = document.querySelector("#liste-voitures");
+const etatVide = document.querySelector("#etat-vide");
 
-const listeVoitures  = document.querySelector("#liste-voitures");
-listeVoitures.classList.add("liste-voitures")
+const annulermodification = document.querySelector("#annuler-modification");
 
-    if(listeVoitures === 0){
+function afficherTableVoiture() {
+  if (voitures.length === 0) {
+    etatVide.hidden = false;
+  }
+  listeVoitures.replaceChildren();
 
-        listeVoitures.text = "Aucune voiture n’est disponible pour le moment."
-    }
-
-function afficherTableVoiture(){
-
-
-voituresInitiales.forEach((voituresInitiale) => {
-    // listeVoitures.replaceChildren();
-    
-
+  voitures.forEach((voiture) => {
     const containerTable = document.createElement("tr");
 
     const marque = document.createElement("td");
-    const strong = document.createElement("strong")
-    strong.textContent = voituresInitiale.marque
-
+    const strong = document.createElement("strong");
+    strong.textContent = voiture.marque;
 
     const modele = document.createElement("td");
 
-    modele.textContent = voituresInitiale.modele
-
-
+    modele.textContent = voiture.modele;
 
     const immatriculation = document.createElement("td");
     const span = document.createElement("span");
     span.classList.add("registration");
-    
-    span.textContent = voituresInitiale.immatriculation;
 
-    const categorie = document.createElement("td")
+    span.textContent = voiture.immatriculation;
 
-    categorie.textContent = voituresInitiale.categorie
+    const categorie = document.createElement("td");
 
+    categorie.textContent = voiture.categorie;
 
-    const prixJour = document.createElement("td")
-   prixJour.classList.add("price")
-   prixJour.textContent = voituresInitiale.prixJour
+    const prixJour = document.createElement("td");
+    prixJour.classList.add("price");
+    prixJour.textContent = voiture.prixJour;
 
-   const text = document.createElement("span");
-   text.textContent = "  DH / jour"
+    const text = document.createElement("span");
+    text.textContent = "  DH / jour";
 
-   const statut = document.createElement("td")
+    const statut = document.createElement("td");
 
-   const spanone = document.createElement("span")
+    const spanone = document.createElement("span");
 
-   spanone.classList.add("badge", "badge-disponible")
+    spanone.classList.add("badge", "badge-disponible");
 
-   spanone.textContent = voituresInitiale.statut
+    spanone.textContent = voiture.statut;
 
-   const btns = document.createElement("td")
+    const btns = document.createElement("td");
 
-   const containerBtn = document.createElement("div")
-   containerBtn.classList.add("row-actions")
+    const containerBtn = document.createElement("div");
+    containerBtn.classList.add("row-actions");
 
-   const btnModifier = document.createElement("button")
-   btnModifier.classList.add("button", "button-edit")
-   btnModifier.textContent = "Modifier"
+    const btnModifier = document.createElement("button");
+    btnModifier.classList.add("button", "button-edit");
+    btnModifier.textContent = "Modifier";
 
+    btnModifier.addEventListener("click", (e) => {
+      e.preventDefault();
+      preparerModification(voiture.id);
+      idModifier = voiture.id;
+    });
 
-  
+    const btnSupprimer = document.createElement("button");
+    btnSupprimer.type = "button";
+    btnSupprimer.classList.add("button", "button-delete");
+    btnSupprimer.textContent = "Supprimer";
 
-   const btnSupprimer = document.createElement("button")
-   btnSupprimer.classList.add("button", "button-delete")
-   btnSupprimer.textContent = "Supprimer"
+    btnSupprimer.addEventListener("click", (e) => {
+      e.preventDefault();
 
+      if (confirm("vous vouley de supprimer cette voiture")) {
+        voitures = voitures.filter((item) => item.id != voiture.id);
+      }
+      afficherTableVoiture();
+    });
 
-   
+    containerTable.appendChild(marque);
+    marque.appendChild(strong);
 
+    containerTable.appendChild(modele);
 
-containerTable.appendChild(marque);
-marque.appendChild(strong);
-containerTable.appendChild(modele);
+    containerTable.appendChild(immatriculation);
+    immatriculation.appendChild(span);
 
-containerTable.appendChild(immatriculation)
-immatriculation.appendChild(span)
+    containerTable.appendChild(categorie);
 
-containerTable.appendChild(categorie)
+    containerTable.appendChild(prixJour);
 
-containerTable.appendChild(prixJour)
+    prixJour.appendChild(text);
 
-prixJour.appendChild(text)
+    containerTable.appendChild(statut);
+    statut.appendChild(spanone);
 
-containerTable.appendChild(statut)
- statut.appendChild(spanone)
+    containerTable.appendChild(btns);
+    btns.appendChild(containerBtn);
+    containerBtn.appendChild(btnModifier);
 
-containerTable.appendChild(btns)
-btns.appendChild(containerBtn)
-containerBtn.appendChild(btnModifier)
+    containerBtn.appendChild(btnSupprimer);
 
-containerTable.appendChild(btns)
-btns.appendChild(containerBtn)
-containerBtn.appendChild(btnSupprimer)
-
-
-// containerTable.appendChild(btnModifier);
-// containerTable.appendChild(btnSupprimer);
-
-listeVoitures.appendChild(containerTable);
-
-});
+    listeVoitures.appendChild(containerTable);
+  });
 }
 
 afficherTableVoiture();
 
+function ajouterVoitute() {
+  const erreurmarque = document.querySelector("#erreur-marque");
+  const erreurmodele = document.querySelector("#erreur-modele");
+  const erreurimmatriculation = document.querySelector(
+    "#erreur-immatriculation",
+  );
+  const aideimmatriculatio = document.querySelector("#aide-immatriculation");
+  const erreurprixjour = document.querySelector("#erreur-prix-jour");
 
-function ajouterVOitute(){
-
-    const marque = document.querySelector("#marque");
-    const modele = document.querySelector("#modele");
-    const immatriculation = document.querySelector("#immatriculation");
-    const categorie = document.querySelector("#statut");
-    const statut = document.querySelector("#statut");
-    const prix = document.querySelector("#prix-jour");
-
-
-    const EviterDoub = 
-
-   marque = marque.value;
-   modele = modele.value;
-   immatriculation = immatriculation.value;
-   categorie = categorie.value;
-   statut = statut.value;
-   prix = prix.value;
-   
-
-   if(marque.tim() === "" || modele.tim() === "" || immatriculation.trim() === "" || prix.trim()){
-    alert(" tout les champs sont obligatoire")
+  if (marque.value.trim() === "") {
+    erreurmarque.classList.add("field-error");
+    erreurmarque.textContent = "Erreur : La marque est obligatoire.";
     return;
-   }
+  }
 
-   if(prix <= 0 || isNaN(prix)){
-    alert("enter le prix est strictement positif")
+  if (modele.value.trim() === "") {
+    erreurmodele.classList.add("field-error");
+    erreurmodele.textContent = "Erreur : Le modèle est obligatoire.";
     return;
-   }
+  }
 
+  if (immatriculation.value.trim() === "") {
+    erreurimmatriculation.classList.add("field-error");
+    erreurimmatriculation.textContent = "Erreur : La marque est obligatoire.";
+    return;
+  }
 
+  const eviterDoublementImmatriculation = voitures.find(
+    (voiture) => voiture.immatriculation === immatriculation.value.trim(),
+  );
+  if (eviterDoublementImmatriculation !== undefined) {
+    aideimmatriculatio.textContent = "Cette immatriculation existe déjà.";
+    return;
+  }
 
-   const neveauVoiture = {
-      "id": voituresInitiales.length + 1,
-    "marque": marque,
-    "modele": modele,
-    "immatriculation": immatriculation,
-    "categorie": categorie,
-    "prixJour": prix,
-    "statut": statut,
-   }
+  if (prixJour.value.trim() <= 0) {
+    erreurprixjour.classList.add("field-error");
+    erreurprixjour.textContent = "enter le valeur de paix est positif";
 
-   listeVoitures.push(neveauVoiture)
-   afficherTableVoiture();
+    return;
+  }
 
+  voitures.push({
+    id: voitures.length + 1,
+    marque: marque.value,
+    modele: modele.value,
+    immatriculation: immatriculation.value,
+    categorie: categorie.value,
+    prixJour: prixJour.value,
+    statut: statut.value,
+  });
 
+  afficherTableVoiture();
 }
 
-const ajoutervoiture = document.querySelector("#bouton-enregistrer")
+formulaire.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (idModifier === null) ajouterVoitute();
+  else modifierVoiture(idModifier);
+});
 
-ajoutervoiture.addEventListener("click", (e) => {
- e.preventDefault();
- ajouterVOitute();
+const voitureId = document.querySelector("#voiture-id");
 
-})
+function preparerModification(id) {
+  const voiture = voitures.find((item) => item.id === id);
+
+  marque.value = voiture.marque;
+  modele.value = voiture.modele;
+  immatriculation.value = voiture.immatriculation;
+  categorie.value = voiture.categorie;
+  prixJour.value = voiture.prixJour;
+  statut.value = voiture.statut;
+
+  voitureId.value = voiture.id;
+
+  boutonEnregistrer.textContent = "Modifier";
+  titreFormailaire.textContent = "Modifier une voiture";
 
 
 
+  annulermodification.hidden = false;
+}
 
+function modifierVoiture(id) {
+  let objet = voitures.find(voiture => voiture.id === id);
+  let index = voitures.indexOf(objet);
+  voitures[index] = {
+    id: id,
+    marque: marque.value,
+    modele: modele.value,
+    immatriculation: immatriculation.value,
+    categorie: categorie.value,
+    prixJour: prixJour.value,
+    statut: statut.value,
+  };
+ 
+ afficherTableVoiture();
+
+  marque.value = "";
+  modele.value = "";
+  immatriculation.value = "";
+  categorie.value = "";
+  prixJour.value = "";
+  statut.value = "";
+
+  idModifier = null;
+}
+
+
+  
 
 
