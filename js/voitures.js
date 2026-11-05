@@ -9,7 +9,7 @@ const modele = document.querySelector("#modele");
 const immatriculation = document.querySelector("#immatriculation");
 const categorie = document.querySelector("#categorie");
 const statut = document.querySelector("#statut");
-const prixJour = document.querySelector("#prix-jour");
+const prixJour = document.querySelector("#prix-jour")
 const boutonEnregistrer = document.querySelector("#bouton-enregistrer");
 
 const titreFormailaire = document.querySelector("#titre-formulaire");
@@ -20,13 +20,13 @@ const etatVide = document.querySelector("#etat-vide");
 
 const annulermodification = document.querySelector("#annuler-modification");
 
-function afficherTableVoiture() {
+function afficherTableVoiture(liste = voitures) {
   if (voitures.length === 0) {
     etatVide.hidden = false;
   }
   listeVoitures.replaceChildren();
 
-  voitures.forEach((voiture) => {
+  liste.forEach((voiture) => {
     const containerTable = document.createElement("tr");
 
     const marque = document.createElement("td");
@@ -230,5 +230,38 @@ function modifierVoiture(id) {
 
 
   
+const inputRecherche = document.querySelector("#recherche");
+
+function rechercherVoiture() {
+  const recherche = inputRecherche.value.toLowerCase().trim();
+
+  const resultats = voitures.filter(item =>
+    item.marque.toLowerCase().includes(recherche) ||
+    item.modele.toLowerCase().includes(recherche) ||
+    item.immatriculation.toLowerCase().includes(recherche)
+  );
+
+  afficherTableVoiture(resultats);
+}
+
+inputRecherche.addEventListener("input", rechercherVoiture);
 
 
+
+const triprix = document.querySelector("#tri-prix")
+
+
+function trix() {
+    const tri = triprix.value;
+
+    if (tri === "croissant") {
+        voitures.sort((a, b) => a.prixJour - b.prixJour);
+    }
+    else if (tri === "decroissant") {
+        voitures.sort((a, b) => b.prixJour - a.prixJour);
+    }
+
+    afficherTableVoiture();
+}
+
+triprix.addEventListener("change", trix);

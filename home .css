@@ -1,0 +1,242 @@
+
+.displaynone {
+    display: none;
+}
+
+div{
+    box-sizing: border-box;
+    line-height: 35px;
+}
+.pragraph {
+    font-size: 11px !important;
+}
+
+.Progression{
+   
+    border: 1px #D8E1EF solid;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-around;
+    gap: 12px;
+    font-size: 8px;
+  color: #697C94;
+}
+
+.Numero {
+    padding: 15px;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: #F4F6FA;
+    color: #697C94;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.Formulaire-Véhicule {
+    margin-top: 20px;
+    border: 1px #D8E1EF solid;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.vehicule{
+   font-size: 11px;
+   font-weight: 700;
+   color: #2852E3;
+
+}
+
+h2{
+    font-size: 20px;
+    font-weight: 700;
+    color: #192B3F;
+}
+
+.paragraphs {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 19px;
+    color: #697C94;
+    margin: 0px;
+}
+
+.article {
+     border: 1px #D8E1EF solid;
+     background-color: #FFFFFF;
+     border-radius: 16px;
+     padding: 16px;
+     margin-top: 7px;
+     
+}
+
+.display {
+    display: flex;
+    justify-content: space-between;
+}
+.voitur {
+     background-color: #EEF2FF;
+     padding: 7px;
+     padding-right: 35px;
+     border-radius: 6px;
+     font-size: 11px;
+     font-weight: 700;
+     color: #2852E3;
+}
+.check  {
+    font-size: 12px;
+    width: 20px;
+    border: 1.5px #D8E1EF solid;
+
+}
+.type-voitute {
+     color: #192B3F;
+     font-size: 16px;
+     font-weight: 700;
+}
+
+.isDesponible {
+    color: #16835C;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.prix {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2852E3;
+
+}
+.text {
+    padding-top: 10px;
+    line-height: 20px;
+}
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.btn{
+    display: flex;
+   justify-content: space-around;
+
+}
+
+.formailaire {
+    margin-top: 20px;
+    
+}
+.label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #192B3F;
+
+}
+input {
+    background-color: #FFFFFF;
+    border: 1px solid #D8E1EF;
+    border-radius: 8px;
+
+}
+h3 {
+    font-weight: 700;
+    font-size: 17px;
+    color: #192B3F;
+}
+.p {
+    
+    background-color: #EEF2FF;
+    padding: 20px;
+    border: 1px solid #EEF2FF;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 600;
+    color: #2852E3;
+    line-height: 1.5;
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+
+}
+
+.recommencer {
+    color: #192B3F;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px #D8E1EF solid;
+    background-color: #FFFFFF;
+}
+.suivant {
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px #2852E3;
+    background-color: #2852E3;
+    padding: 9px 30px;
+}
+.resume-du-prix {
+     margin-top: 20px;
+    border: 1px #D8E1EF solid;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 16px;
+    line-height: 3;
+}
+
+
+.prixtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recapertion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total{
+      display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.per {
+    font-size: 12px;
+    font-weight: 400;
+    color: #697C94;
+}
+
+.pere {
+    margin: 10px;
+    font-size: 12px;
+    color: #697C94;
+    border: 1px #F4F6FA;
+    background-color: #F4F6FA;
+    border-radius: 16px;
+    padding: 10px;
+}
+
+
+
+ @media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+  .Progression {
+    align-items: center;
+    font-weight: 900;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .articleone {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+}
